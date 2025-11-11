@@ -95,16 +95,12 @@ for estado, valor in funcionarios:
 if __name__ == "__main__":
 
     print("======== LOG DE SAÍDA DO MÓDULO 3 ========")
-
-    # Imprime os resultados simples em uma linha
     print(f"1. Soma de sub-listas: {lista_de_listas_somadas}")
     print(f"2. Extração de elementos: {T_elementos_separados}")
     print(f"3. Tuplas (índice, valor): {lista_de_tuplas_nomes}")
     print(f"4. Filtro (if): {lista_numerica_apartamento}")
     print(f"5. Dict comprehension: {dic_comprehension}")
     print(f"6. Filtro duplo (and): {lista_filtrada_2022}")
-
-    # Para listas/tabelas longas, usamos um 'for' para imprimir linha a linha
     print(f"\n7. 'if-else' aninhado:")
     for item in lista_de_tuplas_clinica:
         print(f"  {item}")
@@ -112,11 +108,7 @@ if __name__ == "__main__":
     print(f"\n8. Tabela com Cabeçalho:")
     for linha in tabela_final:
         print(f"  {linha}")
-
-    # De volta aos prints de uma linha
     print(f"\n9. Contagem de itens únicos: {dict_contagem_estados}")
-
-    # Para resultados duplos, separamos para clareza
     print(f"\n10. Agrupamento de Dados:")
     print(f"  Listas por estado: {dic_listas_por_estado}")
     print(f"  Soma por estado:   {dic_soma_por_estado}")
