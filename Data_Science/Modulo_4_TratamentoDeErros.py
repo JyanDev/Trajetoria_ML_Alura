@@ -1,96 +1,137 @@
-#Aquecimento
+"""
+Exercícios do Módulo 4 da Formação de Data Science - Alura.
 
-#1. Faça um programa que solicite à pessoa usuária digitar dois números float e calcular a divisão entre esses números. O código deve conter um tratamento de erro, indicando o tipo de erro que foi gerado caso a divisão não seja possível de realizar.
-#Teste o programa com o segundo valor numérico do input igual a 0. Também teste utilizando caracteres textuais no input para checar os tipos de erro que ocorrem.
+Este arquivo serve como um registro de prática para os seguintes tópicos:
+- Tratamento de Exceções (try, except, else, finally)
+- Captura de erros específicos (ValueError, KeyError, ZeroDivisionError)
+- Lançamento de exceções personalizadas com 'raise'
+- Validação de dados em funções
+- Uso avançado de 'zip' com parâmetro 'strict=True'
+"""
 
-try:
-    #dividendo = float(input("Número do dividendo: "))
-    #divisor = float(input("Número do divisor: "))
-    dividendo = 1
-    divisor = 10
-    resultado = dividendo/divisor
-except ValueError as v:
-    print(f"Somente números!")
-except ZeroDivisionError:
-    print(f"AT1: Resultado da divisão: 0.00")
-else:
-    print(f"AT1: Resultado da divisão: {resultado:.2f}")
-
-
-#2. Faça um programa que solicite à pessoa usuária digitar um texto que será uma chave a ser pesquisada no seguinte dicionário: idades = {'Júlia': 16, 'Carol': 23, 'Alberto': 19, 'Roberta': 17}, armazenando o resultado do valor em uma variável. O código deve conter um tratamento de erro KeyError, imprimindo a informação 'Nome não encontrado', caso ocorra o erro; e imprimir o valor caso não ocorra nenhum.
-#Teste o programa com um nome presente em uma das chaves do dicionário e com um que não esteja no dicionário para verificar a mensagem de erro.
-idades = {'Júlia': 16, 'Carol': 23, 'Alberto': 19, 'Roberta': 17}
-
-try:
-
-    #chave = str(input("Nome para buscar:"))
-    chave = "Carol"
-    valor = idades[chave]
-
-except KeyError as k:
-    print("Nome não encontrado")
-
-else:
-    print(f"AT2: Idade de {chave} é {valor}")
+# 1. Divisão Simples com Tratamento: Captura de ValueError (entrada não numérica) e ZeroDivisionError.
+def exercicio_divisao_basica():
+    try:
+        # Valores hardcoded para teste rápido (simulando input)
+        dividendo = 1
+        divisor = 10
+        resultado = dividendo / divisor
+    except ValueError:
+        return "Erro: Somente números!"
+    except ZeroDivisionError:
+        return "AT1: Resultado da divisão: 0.00"
+    else:
+        return f"AT1: Resultado da divisão: {resultado:.2f}"
 
 
-#3. Crie uma função que recebe uma lista como parâmetro e converta todos os valores da lista para float. A função deve conter um tratamento de erro indicando o tipo de erro gerado e retornar a lista caso não tenha ocorrido nenhum erro. Por fim, deve ter a cláusula finally para imprimir o texto: 'Fim da execução da função'.
+# 2. Busca Segura em Dicionário: Tratamento de KeyError para chaves inexistentes.
+def exercicio_busca_dicionario():
+    idades = {'Júlia': 16, 'Carol': 23, 'Alberto': 19, 'Roberta': 17}
+    chave = "Carol" # Simulação de input
 
-def converter_float(lista = []):
+    try:
+        valor = idades[chave]
+    except KeyError:
+        return "Nome não encontrado"
+    else:
+        return f"AT2: Idade de {chave} é {valor}"
+
+
+# 3. Validação de Tipos e Clausula Finally: Função que usa 'raise TypeError' para validar entradas e 'finally' para encerramento.
+def converter_float(lista=None):
+    if lista is None:
+        lista = []
+
     lista_float = []
     if type(lista) == list:
         for num in lista:
             if isinstance(num, (int, float)):
                 lista_float.append(float(num))
-                continue
             else:
                 continue
         return lista_float
     else:
-        raise TypeError ()
+        raise TypeError("A entrada deve ser uma lista.")
 
-try:
-    lista_valores = ["1",1,2,3,4]
-    lista_valores_f = converter_float(lista_valores)
-    print(f"AT3: Convertendo lista do tipo {type(lista_valores[1]).__name__} para {type(lista_valores_f[1]).__name__}...")
 
-except TypeError:
-    print(f" Certifique-se de ser uma lista adequada to tipo list. Exemplo: [1,2,3,...]")
+# 4. (Desafio) Análise de Dados Laboratoriais:
+# Aplicação de zip(strict=True) para garantir integridade dos dados.
+# Implementação de lógica de UX para decidir entre 'ver o erro' ou 'forçar o cálculo' ao encontrar divisões por zero.
 
-except IndexError as i:
-    print(f"Erro: {type(i).__name__}. Certifique-se de não haver tuplas, dict, lista dentro de lista ou formato irregular dentro da sua lista.")
+def divide_colunas(pressao=None, temperaturas=None):
+    if pressao is None: pressao = []
+    if temperaturas is None: temperaturas = []
 
-except Exception as e:
-    print(f"Erro: {type(e).__name__}.")
+    # List comprehension otimizada com round e zip strict
+    coluna_divisao = [round(p/t, 2) for p, t in zip(pressao, temperaturas, strict=True)]
+    return coluna_divisao
 
-else:
-    print(f"Lista float: {lista_valores_f} ")
-finally:
-    print("Fim da execução da função")
+def localizar_zerodivision_error(pressao, temperaturas, force=False):
+    if force:
+        # Força o cálculo substituindo divisões por zero por 0
+        coluna_divisao = [
+            0 if t == 0 else round(p/t, 2)
+            for p, t in zip(pressao, temperaturas, strict=True)
+        ]
+        return coluna_divisao
+    else:
+        # Retorna relatório de onde estão os erros
+        report_erros = [
+            f"Erro na divisão (índice {i}): Temp {t} / Pressão {p}"
+            for i, (p, t) in enumerate(zip(pressao, temperaturas, strict=True))
+            if t == 0
+        ]
+        return report_erros
 
-#7. Você foi contratado(a) como uma pessoa cientista de dados para auxiliar um laboratório que faz experimentos sobre o comportamento de uma cultura de fungos. O laboratório precisa avaliar constantemente a razão (divisão) entre os dados de pressão e temperatura do ambiente controlado recolhidos durante a experimentação para definir a melhor condição para os testes.
-#
-#Para cumprir com a demanda, você precisa criar uma função divide_colunas que recebe os dados das colunas de pressão e temperatura (que vem no formato de listas) e gerar uma nova coluna com o resultado da divisão. Os parâmetros da função são as duas listas e você deve tratar dentro dela ao menos 2 tipos de exceções:
-#
-#Verificar se as listas têm o mesmo tamanho (ValueError)
-#Verificar se existe alguma divisão por zero (ZeroDivisionError)
-#Para testar a função, vamos realizar a divisão entre duas listas de dados coletados no experimento, com os valores de pressão e temperatura do ambiente controlado.
-#
-#Como teste, use os seguintes dados:
-#
-#Dados sem exceção:
-#pressoes = [100, 120, 140, 160, 180]
-#temperaturas = [20, 25, 30, 35, 40]
-#Copiar código
-#Dados com exceção:
-#1) Exceção de ZeroDivisionError
-#
-#pressoes = [60, 120, 140, 160, 180]
-#temperaturas = [0, 25, 30, 35, 40]
-#Copiar código
-#2) Exceção de ValueError
-#
-#pressoes = [100, 120, 140, 160]
-#temperaturas = [20, 25, 30, 35, 40]
-#Copiar código
-#Dica: Você pode usar zip() para parear os dados da lista_1 com a lista_2. Crie uma estrutura try-except que caso uma das exceções sejam lançadas, podemos ver o tipo de erro na saída.
+
+# ===================================================================
+# --- BLOCO DE EXECUÇÃO (TESTES E LOGS) ---
+# ===================================================================
+
+if __name__ == "__main__":
+    print("======== LOG DE SAÍDA DO MÓDULO 4 (EXCEÇÕES) ========\n")
+
+    # --- Teste Ex 1 ---
+    print(exercicio_divisao_basica())
+
+    # --- Teste Ex 2 ---
+    print(exercicio_busca_dicionario())
+
+    # --- Teste Ex 3 ---
+    try:
+        lista_valores = ["1", 1, 2, 3, 4]
+        lista_valores_f = converter_float(lista_valores)
+        print(f"AT3: Lista convertida: {lista_valores_f}")
+    except TypeError as e:
+        print(f"AT3 Erro de Tipo: {e}")
+    except Exception as e:
+        print(f"AT3 Erro genérico: {type(e).__name__}")
+    finally:
+        print("AT3: Fim da execução da função converter_float")
+
+    # --- Teste Ex 4 (Desafio Complexo) ---
+    print("\n--- AT4: Desafio do Laboratório (Interativo) ---")
+
+    # Dados para teste de erro
+    pressoes_teste = [60, 120, 140, 160, 180]
+    temperaturas_teste = [0, 25, 30, 35, 40] # Contém zero no índice 0
+
+    try:
+        print(f"Tentando dividir colunas...")
+        print(divide_colunas(pressoes_teste, temperaturas_teste))
+
+    except ValueError:
+        print("Erro: As listas possuem tamanhos diferentes (detectado pelo strict=True).")
+
+    except ZeroDivisionError:
+        print(">> Alerta: Divisão por zero detectada.")
+        # Simulação de interação (pode ser alterada para input real se desejar)
+        # force_input = input("Pressione Enter para ver o erro ou digite algo para forçar: ")
+        force_input = "force" # Hardcoded para demonstração no log
+
+        if force_input.strip():
+            print(f"Modo Forçado Ativado: {localizar_zerodivision_error(pressoes_teste, temperaturas_teste, force=True)}")
+        else:
+            print(f"Relatório de Erros: {localizar_zerodivision_error(pressoes_teste, temperaturas_teste)}")
+
+    print("\n======== FIM DO LOG ========")
