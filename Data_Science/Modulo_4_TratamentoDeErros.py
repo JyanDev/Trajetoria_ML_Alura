@@ -6,7 +6,7 @@ Este arquivo serve como um registro de prática para os seguintes tópicos:
 - Captura de erros específicos (ValueError, KeyError, ZeroDivisionError)
 - Lançamento de exceções personalizadas com 'raise'
 - Validação de dados em funções
-- Uso avançado de 'zip' com parâmetro 'strict=True'
+- Uso avançado de 'zip' com parâmetro 'strict = True'
 """
 
 # 1. Divisão Simples com Tratamento: Captura de ValueError (entrada não numérica) e ZeroDivisionError.

@@ -8,7 +8,7 @@ Este arquivo serve como um registro de prática para os seguintes tópicos:
 - Estruturação de dados com 'zip', 'range' e 'enumerate'
 - Uso de 'set' para encontrar valores únicos
 - Lógica de agrupamento e contagem
-"""
+ """
 
 
 # 1. Soma de sub-listas: Feito com list comprehension após pesquisar a função sum().
