@@ -6,8 +6,11 @@ Este diretório contém os exercícios práticos dos primeiros módulos da forma
 
 * Manipulação de Listas, Tuplas e Dicionários.
 * Técnicas de *List Comprehension* e *Dict Comprehension*.
-* Estruturas `try...except...finally` para tratamento de erros.
+* Estruturas try...except...finally para tratamento de erros.
 * Criação de funções e validação de dados.
+* Tratamento, comparações e manipulação de arrays com numpy.
+* Verificação e Tratamento de NaNs.
+* Construir gráficos com Matplotlib.
 
 ## Progresso:
 
