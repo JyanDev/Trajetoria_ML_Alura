@@ -1,6 +1,4 @@
-def algo (teste = False):
-    if teste: return teste
-    else: return teste
-
-teste = True
-print(algo(True))
+url = 'https://raw.githubusercontent.com/allanspadini/numpy/dados/bytebank.csv'
+import numpy as np
+dado= np.loadtxt(url, delimiter=',',skiprows=1,dtype=float)
+np.shape(dado)
