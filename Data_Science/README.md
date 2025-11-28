@@ -20,4 +20,5 @@ Este diretório contém os exercícios práticos dos primeiros módulos da forma
 | :--- | :--- | :---: |
 | [`Modulo_3_ListasTuplasDic.py`](./Modulo_3_ListasTuplasDic.py) | Listas, Tuplas e Dicionários | ✅ Concluído |
 | [`Modulo_4_TratamentoDeErros.py`](./Modulo_4_TratamentoDeErros.py) | try/except, ValueError, ZeroDivisionError | ✅ Concluído |
-| [`Modulo_5_Numpy.py`](./Modulo_5_Numpy.py) | `arrays`,`Matplotlib`, `NaNs`| ⏳ Em Andamento |
+| [`Modulo_5_Numpy.py`](./Modulo_5_Numpy.py) | arrays, Matplotlib, NaNs| ✅ Concluído |
+| [`Modulo_6_Pandas.py`](./Modulo_6_Pandas.py) | `Seleção e agrupamento`,`Transformação e manipulação.`, `Limpeza e tratamento de dados`| ⏳ Em Andamento |

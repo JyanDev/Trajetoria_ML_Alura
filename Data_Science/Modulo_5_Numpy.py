@@ -1,5 +1,5 @@
 """
-Na alura não continha muitos exercícios para praticar, então usei Gemini para criar exercícios de práticas do nível básico ao difícil.
+Na alura não continha muitos exercícios para praticar, então usei Gemini para criar exercícios de práticas do nível básico ao avançado.
 
 """
 
@@ -69,7 +69,7 @@ plt.ylabel("Peso")
 total_frutas = np.sum((dados_csv[:,0] >6.5) & (dados_csv[:,1] < 280))
 print(f"AT9: {total_frutas} ")
 
-#10	 Chefão 	Análise Completa: 1. Crie uma máscara booleana que filtre apenas as frutas com Diâmetro (Coluna 0) entre 7.0 e 7.5. 2. Plote um gráfico de barras (plt.bar ou plt.hist) que exiba a distribuição de Peso (Coluna 1) APENAS para as frutas filtradas.
+#10	 Avançado 	Análise Completa: 1. Crie uma máscara booleana que filtre apenas as frutas com Diâmetro (Coluna 0) entre 7.0 e 7.5. 2. Plote um gráfico de barras (plt.bar ou plt.hist) que exiba a distribuição de Peso (Coluna 1) APENAS para as frutas filtradas.
 
 frutas_filtradas = dados_csv[(dados_csv[:,0] >= 7.0) & (dados_csv[:,0] <= 7.5)]
 
